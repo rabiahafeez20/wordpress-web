@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WordPress Web Development by Takween Digital Services" />
+  <title>WordPress Web Development | Takween Digital Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>:root{
+  --navy:#070d22;
+  --navy-2:#0b1230;
+  --purple:#7538e2;
+  --purple-2:#9b63ff;
+  --blue:#4bc3ff;
+  --ink:#17172a;
+  --muted:#6f7384;
+  --white:#fff;
+  --soft:#f7f8ff;
+  --soft-blue:#f1f7ff;
+  --line:#e7e9f4;
+  --shadow:0 18px 55px rgba(48,35,100,.10);
+  --radius:18px;
+  --font:'Poppins',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);color:var(--ink);background:white;line-height:1.55}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+.container{width:min(1160px,calc(100% - 40px));margin:0 auto}
+.site-header{position:absolute;inset:0 0 auto;z-index:20;padding:21px 0;color:#fff}
+.nav-wrap{display:flex;align-items:center;gap:30px}
+.brand{display:inline-flex;align-items:center;gap:8px;font-weight:700}
+.brand-mark{display:grid;place-items:center;width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--purple),var(--blue));font-size:13px;color:#fff}
+.brand-word{font-size:17px;letter-spacing:-.5px}
+.main-nav{display:flex;gap:30px;margin-left:auto}
+.main-nav a{font-size:11px;font-weight:600;opacity:.78;letter-spacing:.08em}
+.main-nav a:hover,.main-nav .active{opacity:1;color:#a8dfff}
+.nav-cta{margin-left:14px}
+.nav-toggle{display:none;background:none;border:0;padding:5px}
+.nav-toggle span{display:block;width:25px;height:2px;background:#fff;margin:5px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;border-radius:11px;font-size:12px;font-weight:600;transition:.2s}
+.btn-gradient{color:#fff;background:linear-gradient(100deg,var(--purple),#7b4cff 57%,var(--blue));box-shadow:0 10px 25px rgba(117,56,226,.28)}
+.btn-gradient:hover{transform:translateY(-1px);box-shadow:0 14px 30px rgba(117,56,226,.34)}
+.btn-outline-dark{border:1px solid rgba(255,255,255,.28);color:#fff;background:rgba(255,255,255,.03)}
+.btn.full{width:100%}
+.small-btn{min-height:41px;margin-top:10px}
+
+.hero{position:relative;overflow:hidden;min-height:650px;padding:160px 0 100px;background:
+radial-gradient(circle at 82% 28%,rgba(117,56,226,.35),transparent 30%),
+radial-gradient(circle at 15% 85%,rgba(41,163,255,.16),transparent 26%),
+linear-gradient(135deg,#071021 0%,#0a1630 45%,#070d22 100%);color:#fff}
+
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:75px;position:relative;z-index:2}
+.hero h1{font-size:clamp(42px,5.2vw,72px);line-height:1.02;letter-spacing:-3px;margin:16px 0 22px;max-width:720px}
+.hero p{max-width:650px;color:#c5cbe0;font-size:15px}
+.eyebrow{display:inline-flex;align-items:center;border:1px solid rgba(117,56,226,.18);border-radius:999px;background:#f1edff;color:var(--purple);padding:6px 10px;font-size:9px;letter-spacing:.13em;font-weight:700;text-transform:uppercase}
+.eyebrow.dark{background:rgba(117,56,226,.12);border-color:rgba(142,110,255,.38);color:#cbb9ff}
+.hero-actions{display:flex;gap:12px;margin-top:30px}
+.trust-line{display:flex;flex-wrap:wrap;gap:22px;margin-top:25px;font-size:11px;color:#b8c2dc}
+.trust-line span::first-letter{color:#57cbff}
+.hero-art{position:relative;height:440px}
+.browser-card{position:absolute;right:10px;top:30px;width:92%;height:350px;border:1px solid rgba(255,255,255,.14);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(55,68,130,.14));box-shadow:0 40px 80px rgba(0,0,0,.35);backdrop-filter:blur(10px);overflow:hidden}
+.browser-top{height:40px;display:flex;align-items:center;gap:7px;padding-left:18px;border-bottom:1px solid rgba(255,255,255,.1)}
+.browser-top i{width:8px;height:8px;border-radius:50%;background:#6d7597}
+.browser-body{padding:35px;position:relative}
+.wp-badge{display:grid;place-items:center;width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#7439e8,#5baeff);font-size:27px;font-weight:700;box-shadow:0 14px 35px rgba(117,56,226,.35)}
+.wp-badge.small{width:45px;height:45px;font-size:20px}
+.hero-line{height:15px;border-radius:10px;background:linear-gradient(90deg,#5b39d7,#7e58ee,#5bbfff);margin-top:25px}
+.w80{width:80%}.w55{width:55%;opacity:.55}
+.hero-panel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.hero-panel-grid div{height:85px;border-radius:13px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08)}
+.floating-card{position:absolute;padding:16px;border-radius:14px;background:#fff;color:#17172a;box-shadow:0 20px 50px rgba(0,0,0,.25);font-size:10px}
+.floating-card span{display:block;color:var(--purple);font-size:18px;margin-bottom:5px}.mini-left{left:-20px;bottom:55px}.mini-right{right:-20px;bottom:25px}
+
+.section{padding:95px 0}
+.section-light{background:#fff}
+.section-tint{background:linear-gradient(180deg,#f8fbff,#f4f3ff)}
+.section-head{margin-bottom:38px}
+.section-head h2,.why-copy h2,.faq h2,.custom-wp h2,.final-cta h2{font-size:clamp(30px,3.8vw,50px);line-height:1.08;letter-spacing:-1.8px;margin:12px 0 13px}
+.section-head p,.why-copy p{color:var(--muted);max-width:720px}
+.split-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
+.split-head>div{max-width:750px}
+.centered{text-align:center;margin-left:auto;margin-right:auto}
+.centered p{margin-left:auto;margin-right:auto}
+.narrow{max-width:760px}.wide{max-width:850px}
+.card-grid{display:grid;gap:18px}
+.card-grid.four{grid-template-columns:repeat(4,1fr)}
+.card-grid.three{grid-template-columns:repeat(3,1fr)}
+.info-card,.solution-card,.price-card,.project-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.info-card,.solution-card{padding:25px}
+.info-card h3,.solution-card h3{font-size:15px;line-height:1.25;margin:17px 0 10px}
+.info-card p,.solution-card p{font-size:12px;color:var(--muted);margin:0}
+.icon-chip{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(145deg,#f1edff,#e7f7ff);color:var(--purple);font-weight:800;box-shadow:inset 0 0 0 1px rgba(117,56,226,.08)}
+
+.why-wordpress{background:linear-gradient(180deg,#fff 0,#fbfcff 100%)}
+.why-grid{display:grid;grid-template-columns:1fr .95fr;align-items:center;gap:70px}
+.why-copy{max-width:630px}
+.why-visual{min-height:320px;display:grid;place-items:center}
+.why-window{position:relative;width:86%;height:240px;border-radius:22px;background:#fff;border:1px solid #e7e8f5;box-shadow:0 30px 70px rgba(57,42,123,.14);padding:30px}
+.why-bars span{display:block;height:13px;border-radius:8px;margin:18px 0;background:linear-gradient(90deg,#7540e8,#7944f0,#62c8ff)}
+.why-bars span:nth-child(2){width:70%;opacity:.6}.why-bars span:nth-child(3){width:45%;opacity:.32}
+.why-chart{position:absolute;right:25px;bottom:28px;width:130px;height:80px;display:flex;align-items:flex-end;gap:9px;padding:12px;border-radius:13px;background:#f7f5ff}
+.why-chart b{flex:1;border-radius:4px 4px 1px 1px;background:linear-gradient(#5bc6ff,#7538e2)}
+
+.capabilities{position:relative}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.project-card{overflow:hidden}
+.project-media{height:205px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:700}
+.project-a{background:linear-gradient(135deg,#151b36,#7438df)}.project-b{background:linear-gradient(135deg,#7538e2,#37b8df)}.project-c{background:linear-gradient(135deg,#0a1431,#2d507c)}
+.project-content{padding:22px}.project-type{display:inline-block;color:var(--purple);font-size:10px;font-weight:700;margin-bottom:8px}.project-content p{font-size:12px;color:var(--muted)}.project-content a{color:var(--purple);font-size:11px;font-weight:700}.proof-note{font-size:10px;color:#9093a2;margin-top:15px}
+
+.offer-pill{display:inline-flex;margin:14px auto 4px;padding:9px 15px;border-radius:999px;background:linear-gradient(100deg,var(--purple),#7d52ed);color:#fff;font-size:11px;font-weight:700}
+.small-note{font-size:11px!important}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
+.price-card{padding:24px 20px 20px;position:relative;display:flex;flex-direction:column;min-width:0;border-radius:16px;box-shadow:0 16px 42px rgba(54,42,104,.08)}
+.price-card.featured{border:1.5px solid rgba(117,56,226,.48);box-shadow:0 20px 54px rgba(117,56,226,.14)}
+.popular{position:absolute;top:14px;right:14px;background:#ece5ff;color:var(--purple);padding:5px 9px;border-radius:999px;font-size:8px;font-weight:800;letter-spacing:.1em}
+.price-card h3{font-size:18px;line-height:1.2;margin:0 0 16px;padding-right:52px}
+.price-row{display:block;margin-bottom:8px}
+.old-price{display:block;text-decoration:line-through;color:#969aaa;font-size:13px;font-weight:600;margin-bottom:2px}
+.new-price{display:block;font-size:31px;line-height:1.05;font-weight:800;color:var(--purple);letter-spacing:-1px}
+.discount-tag{display:inline-block;margin:7px 0 15px;padding:5px 8px;border-radius:7px;background:#f1edff;color:var(--purple);font-size:8px;font-weight:700}
+.best-for{font-size:10.5px!important;line-height:1.55;color:var(--muted);min-height:65px;margin:0 0 15px}
+.plan-highlights{list-style:none;padding:0;margin:0 0 16px}
+.plan-highlights li{position:relative;padding:7px 0 7px 21px;border-bottom:1px solid #eff0f6;font-size:10.5px;color:#4f5362}
+.plan-highlights li:before{content:"✓";position:absolute;left:0;top:7px;color:var(--purple);font-weight:800}
+.scope-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;border:0;background:transparent;border-top:1px solid #e8e9f1;border-bottom:1px solid #e8e9f1;border-radius:0;padding:11px 0;margin:0 0 14px;font-size:10.5px;font-weight:700;color:var(--ink);cursor:pointer}
+.scope-toggle span{font-size:17px;color:var(--purple);transition:.2s}
+.scope-panel{display:none;padding:0 0 12px}.scope-panel.open{display:block}.scope-panel h4{font-size:11px;margin:0 0 8px}.scope-panel ul{margin:0 0 12px;padding-left:17px}.scope-panel li{font-size:10px;color:#5f6271;margin:5px 0}.boundary{font-size:10px!important;padding:10px;border-radius:8px;background:#f5f7fb;color:#626575!important}
+.price-card .btn.full{margin-top:auto;min-height:44px;font-size:10.5px;padding:0 10px}
+
+
+.custom-wp{background:white}
+.custom-wp-card{border-radius:24px;background:
+radial-gradient(circle at 87% 35%,rgba(90,197,255,.17),transparent 25%),
+linear-gradient(135deg,#081124,#0c1732);color:#fff;padding:46px;display:flex;align-items:center;justify-content:space-between;gap:35px;box-shadow:0 30px 70px rgba(10,17,44,.2)}
+.custom-wp-card>div{max-width:720px}.custom-wp-card p{color:#bdc7de;font-size:13px}.tailored{font-size:23px;font-weight:800;color:#b89cff;margin:8px 0}
+
+.compact{padding:22px}
+.faq-grid{display:grid;grid-template-columns:.36fr .64fr;gap:65px;align-items:start}
+.faq-intro{position:sticky;top:30px}
+.faq-item{border-bottom:1px solid #e7e8ef}
+.faq-q{width:100%;border:0;background:none;padding:20px 0;display:flex;align-items:center;justify-content:space-between;text-align:left;font-weight:600;font-size:13px;cursor:pointer;color:var(--ink)}
+.faq-q span{font-size:22px;color:var(--purple)}
+.faq-a{display:none;padding:0 30px 18px 0}.faq-a.open{display:block}.faq-a p{font-size:12px;color:var(--muted);margin:0}
+
+.final-cta{padding:75px 0;background:
+radial-gradient(circle at 80% 50%,rgba(117,56,226,.4),transparent 30%),
+linear-gradient(135deg,#071024,#0b1531);color:#fff}
+.final-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:50px}.final-cta-inner>div:first-child{max-width:760px}.final-cta h2{margin-bottom:12px}.final-cta p{color:#bdc7dd;font-size:13px}.final-actions{display:flex;gap:10px;flex-direction:column;min-width:250px}
+
+.site-footer{background:#071021;color:#fff;padding:70px 0 25px}
+.footer-grid{display:grid;grid-template-columns:1.25fr .8fr 1fr 1.1fr;gap:48px}.site-footer h4{font-size:12px;margin:0 0 17px}.site-footer p,.site-footer a{display:block;color:#9ea8bf;font-size:10.5px;margin:7px 0}.footer-brand p{font-size:12px;max-width:250px}.footer-bottom{border-top:1px solid rgba(255,255,255,.09);margin-top:45px;padding-top:20px;display:flex;justify-content:space-between;color:#7f8ba5;font-size:9px}
+
+@media(max-width:980px){
+  .main-nav,.nav-cta{display:none}.nav-toggle{display:block;margin-left:auto}
+  .main-nav.open{position:absolute;display:flex;flex-direction:column;top:72px;left:20px;right:20px;background:#0b1430;border:1px solid rgba(255,255,255,.1);padding:20px;border-radius:16px}
+  .hero-grid,.why-grid{grid-template-columns:1fr}.hero{padding-top:130px}.hero-art{height:360px;max-width:650px}.hero h1{font-size:52px}
+  .card-grid.four{grid-template-columns:repeat(2,1fr)}.card-grid.three,.portfolio-grid{grid-template-columns:repeat(2,1fr)}
+  .pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.faq-grid{grid-template-columns:1fr}.faq-intro{position:static}.footer-grid{grid-template-columns:repeat(2,1fr)}
+  .custom-wp-card,.final-cta-inner{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:650px){
+  .container{width:min(100% - 28px,1160px)}.section{padding:72px 0}.hero{min-height:auto;padding:120px 0 90px}.hero h1{font-size:39px;letter-spacing:-1.8px}.hero p{font-size:13px}
+  .hero-actions{flex-direction:column;align-items:stretch}.hero-art{height:300px}.browser-card{width:100%;height:280px}.mini-left{left:0}.mini-right{right:0}.trust-line{gap:10px 16px}
+  .split-head{align-items:flex-start;flex-direction:column}.card-grid.four,.card-grid.three,.portfolio-grid{grid-template-columns:1fr}
+  .section-head h2,.why-copy h2,.faq h2,.custom-wp h2,.final-cta h2{font-size:32px}
+  .why-grid{gap:35px}.why-window{width:100%}.pricing-grid{grid-template-columns:1fr;gap:14px}.price-card{padding:21px}.new-price{font-size:28px}
+  .custom-wp-card{padding:30px}.footer-grid{grid-template-columns:1fr 1fr;gap:30px}.footer-bottom{flex-direction:column;gap:8px}
+}
+
+/* ===== Conversion Funnel Upgrade ===== */
+.hero{padding-bottom:92px;border-bottom:1px solid rgba(255,255,255,.06)}
+.launch-hero-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 5px;padding:10px 13px;border:1px solid rgba(184,156,255,.22);border-radius:12px;background:rgba(255,255,255,.045);width:max-content;max-width:100%;font-size:10px;color:#cfd6e8}
+.launch-hero-bar strong{font-size:13px;color:#fff}.launch-hero-bar i{width:4px;height:4px;border-radius:50%;background:#6bc8ff}.launch-label{font-weight:800;color:#c5b2ff;letter-spacing:.08em}
+.funnel-art{display:flex;align-items:center;justify-content:center;height:auto;min-height:440px}
+.funnel-offer-panel{width:min(430px,100%);padding:30px;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:linear-gradient(150deg,rgba(255,255,255,.10),rgba(255,255,255,.035));box-shadow:0 35px 85px rgba(0,0,0,.34);backdrop-filter:blur(14px)}
+.panel-kicker{display:inline-flex;padding:6px 9px;border-radius:999px;background:rgba(117,56,226,.22);color:#c9b6ff;font-size:8px;font-weight:800;letter-spacing:.12em}
+.panel-title{font-size:23px;line-height:1.2;font-weight:700;letter-spacing:-.7px;margin:14px 0 20px}
+.mini-plan{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 0;border-top:1px solid rgba(255,255,255,.10);font-size:12px}
+.mini-plan span{font-weight:600}.mini-plan div{display:flex;align-items:baseline;gap:8px}.mini-plan del{color:#77829d;font-size:10px}.mini-plan strong{font-size:21px;color:#b69aff}
+.featured-mini{margin:4px -10px;padding:15px 10px;border-radius:12px;border:1px solid rgba(117,56,226,.28);background:rgba(117,56,226,.08)}
+.panel-points{display:grid;grid-template-columns:1fr;gap:7px;margin:18px 0;color:#c6cee1;font-size:10px}.panel-points span::first-letter{color:#7cd3ff}.funnel-offer-panel small{display:block;margin-top:12px;color:#7f8aa5;font-size:8.5px;line-height:1.55}
+.conversion-bridge{padding:0 0 10px;background:#fff}
+.conversion-bridge-inner{display:flex;align-items:center;justify-content:space-between;gap:35px;padding:28px 32px;border-radius:20px;background:linear-gradient(120deg,#081229,#111c3b);color:#fff;box-shadow:0 26px 70px rgba(21,27,65,.15)}
+.conversion-bridge h3{margin:10px 0 5px;font-size:22px;letter-spacing:-.7px}.conversion-bridge p{margin:0;max-width:700px;color:#b9c2d7;font-size:11px}
+.portfolio{padding-top:90px}.portfolio .project-card{transition:.25s transform,.25s box-shadow}.portfolio .project-card:hover{transform:translateY(-5px);box-shadow:0 25px 60px rgba(53,39,116,.15)}
+.pricing{position:relative;padding-top:105px}.pricing:before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:min(1160px,calc(100% - 40px));height:1px;background:linear-gradient(90deg,transparent,rgba(117,56,226,.25),transparent)}
+.why-wordpress{background:#fff}
+.why-takween{background:linear-gradient(180deg,#f7f9ff,#f3f0ff)}
+.final-cta{padding-bottom:100px}
+.sticky-offer{position:fixed;left:0;right:0;bottom:0;z-index:100;background:rgba(7,13,34,.96);border-top:1px solid rgba(255,255,255,.10);backdrop-filter:blur(12px);transform:translateY(110%);transition:transform .25s ease}
+.sticky-offer.visible{transform:translateY(0)}
+.sticky-offer-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#fff}.sticky-offer strong{display:block;font-size:12px}.sticky-offer span{display:block;margin-top:2px;color:#9ea9c1;font-size:10px}.sticky-offer .btn{min-height:40px}
+@media(max-width:980px){.funnel-art{min-height:360px}.conversion-bridge-inner{align-items:flex-start;flex-direction:column}.sticky-offer-inner{padding:10px 0}.sticky-offer span{display:none}}
+@media(max-width:650px){.launch-hero-bar{width:100%;align-items:flex-start;flex-direction:column}.launch-hero-bar i{display:none}.funnel-offer-panel{padding:22px}.panel-title{font-size:20px}.conversion-bridge-inner{padding:24px}.sticky-offer .btn{padding:0 14px;font-size:9px}}
+
+/* ===== Readability Update: body/supporting text only ===== */
+.hero p,
+.section-head p,
+.why-copy p,
+.info-card p,
+.solution-card p,
+.project-content p,
+.proof-note,
+.best-for,
+.plan-highlights li,
+.scope-panel li,
+.boundary,
+.custom-wp-card p,
+.faq-a p,
+.final-cta p,
+.conversion-bridge p,
+.funnel-offer-panel small,
+.site-footer p,
+.site-footer a,
+.footer-brand p,
+.sticky-offer span {
+  font-size: 15px !important;
+  line-height: 1.65;
+}
+
+.trust-line,
+.scope-toggle,
+.faq-q,
+.btn,
+.project-content a {
+  font-size: 14px !important;
+}
+
+.project-type,
+.small-note,
+.discount-tag,
+.panel-points,
+.mini-plan,
+.launch-hero-bar {
+  font-size: 14px !important;
+}
+
+.funnel-offer-panel small {
+  font-size: 14px !important;
+}
+
+.faq-cta {
+  margin-top: 18px;
+  width: max-content;
+}
+
+@media(max-width:650px){
+  .hero p,
+  .section-head p,
+  .why-copy p,
+  .info-card p,
+  .solution-card p,
+  .project-content p,
+  .proof-note,
+  .best-for,
+  .plan-highlights li,
+  .scope-panel li,
+  .boundary,
+  .custom-wp-card p,
+  .faq-a p,
+  .final-cta p,
+  .conversion-bridge p,
+  .funnel-offer-panel small,
+  .site-footer p,
+  .site-footer a,
+  .footer-brand p,
+  .sticky-offer span {
+    font-size: 14px !important;
+  }
+}
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="https://takweendigitalservices.co.uk/" aria-label="Takween Digital Services home">
+        <span class="brand-mark">tk</span><span class="brand-word">takween</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav">
+        <a href="https://takweendigitalservices.co.uk/">HOME</a>
+        <a class="active" href="https://takweendigitalservices.co.uk/services/">SERVICES</a>
+        <a href="https://takweendigitalservices.co.uk/portfolio/">PORTFOLIO</a>
+        <a href="https://takweendigitalservices.co.uk/about/">ABOUT</a>
+        <a href="https://takweendigitalservices.co.uk/contact/">CONTACT</a>
+      </nav>
+      <a class="btn btn-gradient nav-cta" href="https://takweendigitalservices.co.uk/contact/">Get a Free Quote →</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-glow glow-a"></div>
+      <div class="hero-glow glow-b"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow dark">WORDPRESS DEVELOPMENT</div>
+          <!-- <div class="launch-hero-bar">
+            <span class="launch-label">LAUNCH OFFER</span>
+            <span>Landing Pages from <strong>£358</strong></span>
+            <i></i>
+            <span>Business Websites from <strong>£798</strong></span>
+          </div>
+           -->
+          <h1>WordPress Websites Built Around Your Business Needs</h1>
+          <p>Whether you need a professional business website, an online store, a course platform or something more tailored, we build WordPress solutions that are easy to manage, structured around your customers and designed to support real business goals.</p>
+          <div class="hero-actions">
+            <a class="btn btn-gradient" href="#pricing">Discuss Your WordPress Project →</a>
+            <a class="btn btn-outline-dark" href="#portfolio">View WordPress Work</a>
+          </div>
+          <div class="trust-line">
+            <span>● Clear Pricing</span>
+            <span>● UK-Based Agency</span>
+            <span>● Post Launch Support</span>
+          </div>
+        </div>
+        <div class="hero-art funnel-art">
+          <div class="funnel-offer-panel">
+            <div class="panel-kicker">60% LAUNCH OFFER</div>
+            <div class="panel-title">Choose the right WordPress solution.</div>
+            <div class="mini-plan">
+              <span>Landing Page</span>
+              <div><del>£895</del><strong>£358</strong></div>
+            </div>
+            <div class="mini-plan featured-mini">
+              <span>Business Website</span>
+              <div><del>£1,995</del><strong>£798</strong></div>
+            </div>
+            <div class="panel-points">
+              <span>✓ Clear pricing</span>
+              <span>✓ UK-based agency</span>
+              <span>✓ Post-launch support</span>
+            </div>
+            <a class="btn btn-gradient full" href="#pricing">View All WordPress Packages →</a>
+            <small>Limited launch slots. Third-party licences, hosting, domains and paid services are separate unless explicitly included in the proposal.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light problems">
+      <div class="container">
+        <div class="section-head split-head">
+          <div>
+            <div class="eyebrow">COMMON PROBLEMS</div>
+            <h2>Your Website Should Make Business Easier</h2>
+            <p>A WordPress website can look perfectly fine and still make it harder for people to choose you, contact you or buy from you.</p>
+          </div>
+          <a class="btn btn-gradient" href="https://takweendigitalservices.co.uk/contact/">Tell Us What Needs to Improve →</a>
+        </div>
+
+        <div class="card-grid four">
+          <article class="info-card">
+            <div class="icon-chip">▣</div>
+            <h3>Hard to Manage</h3>
+            <p>Routine updates shouldn’t require a developer. We build WordPress sites that are easier to manage.</p>
+          </article>
+          <article class="info-card">
+            <div class="icon-chip">◎</div>
+            <h3>Low Engagement</h3>
+            <p>If visitors browse but don’t enquire, book or buy, the problem may be the user journey.</p>
+          </article>
+          <article class="info-card">
+            <div class="icon-chip">↗</div>
+            <h3>Outgrown Setup</h3>
+            <p>As your business grows, your website may need more pages, integrations or functionality.</p>
+          </article>
+          <article class="info-card">
+            <div class="icon-chip">◷</div>
+            <h3>Slow or Outdated</h3>
+            <p>Slow performance, poor mobile experience or dated layouts can weaken your business credibility.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="conversion-bridge">
+      <div class="container conversion-bridge-inner">
+        <div>
+          <span class="eyebrow dark">ONE CLEAR NEXT STEP</span>
+          <h3>Not sure which WordPress package fits?</h3>
+          <p>Tell us what you are trying to build, improve or replace. You do not need to arrive with a technical specification - start with what the business needs.</p>
+        </div>
+        <a class="btn btn-gradient" href="#pricing">Compare Packages →</a>
+      </div>
+    </section>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  <section class="section section-tint capabilities">
+      <div class="container">
+        <div class="section-head centered narrow">
+          <div class="eyebrow">OUR WORDPRESS SOLUTIONS</div>
+          <h2>What Can We Build for You With WordPress?</h2>
+          <p>From straightforward business websites to more advanced platforms, we use WordPress to solve different customer and operational needs.</p>
+        </div>
+        <div class="card-grid three">
+          <article class="solution-card"><div class="icon-chip">▤</div><h3>Business Websites</h3><p>Professional websites for service businesses and SMEs, built to strengthen trust and generate enquiries.</p></article>
+          <article class="solution-card"><div class="icon-chip">🛒</div><h3>WooCommerce Stores</h3><p>Online stores with products, payments, checkout and shipping built to support smooth selling.</p></article>
+          <article class="solution-card"><div class="icon-chip">▥</div><h3>Landing Pages</h3><p>Focused pages for campaigns, offers and lead generation with one clear action.</p></article>
+          <article class="solution-card"><div class="icon-chip">⌂</div><h3>LMS &amp; Course Platforms</h3><p>Course platforms with lessons, quizzes, student access, certificates, payments and progress tracking.</p></article>
+          <article class="solution-card"><div class="icon-chip">♙</div><h3>Membership &amp; Booking Websites</h3><p>Membership, booking and gated-content experiences built around how customers use your services.</p></article>
+          <article class="solution-card"><div class="icon-chip">&lt;/&gt;</div><h3>Custom WordPress Solutions</h3><p>Tailored WordPress builds with custom functionality, APIs, integrations, plugins and workflows.</p></article>
+        </div>
+      </div>
+    </section>
+
+<section class="section portfolio" id="portfolio">
+      <div class="container">
+        <div class="section-head split-head">
+          <div>
+            <div class="eyebrow">FEATURED WORK</div>
+            <h2>See WordPress Solutions in Practice</h2>
+            <p>A selection of WordPress websites and concepts showing how we approach different businesses, customer journeys and functionality.</p>
+          </div>
+          <a class="btn btn-gradient" href="#pricing">See Pricing →</a>
+        </div>
+        <div class="portfolio-grid">
+          <article class="project-card">
+            <div class="project-media project-a"><span>Project Name</span></div>
+            <div class="project-content"><div class="project-type">Business / solution type</div><p>Designed to help [business type] achieve [business need]</p><a href="#">View Project →</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-media project-b"><span>Project Name</span></div>
+            <div class="project-content"><div class="project-type">Business / solution type</div><p>Designed to help [business type] achieve [business need]</p><a href="#">View Project →</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-media project-c"><span>Project Name</span></div>
+            <div class="project-content"><div class="project-type">Business / solution type</div><p>Designed to help [business type] achieve [business need]</p><a href="#">View Project →</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<section class="section section-tint pricing" id="pricing">
+      <div class="container">
+        <div class="section-head centered wide">
+          <div class="eyebrow">TRANSPARENT WORDPRESS PRICING</div>
+          <h2>Choose the WordPress Package That Fits Your Project</h2>
+          <p>Choose the package that best fits your project. If none are suitable, discuss your requirements with us for a tailored quote. Third-party licences, hosting, domains and paid services are charged separately.</p>
+          <!-- <div class="offer-pill">Launch Offer - 60% Off • Limited Launch Slots</div> -->
+          
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card">
+            <div class="price-card-top">
+              <h3>Landing Page</h3>
+              <div class="price-row"><span class="old-price">From £895</span><span class="new-price">From £358</span></div>
+              <div class="discount-tag">60% off, limited launch slots</div>
+              <p class="best-for"><strong>Best for</strong> Campaigns, lead generation and service launches.</p>
+              <ul class="plan-highlights">
+                <li>1 conversion-focused landing page</li>
+                <li>Responsive design</li>
+                <li>Contact or enquiry form</li>
+                <li>2 revision rounds</li>
+              </ul>
+            </div>
+            <button class="scope-toggle" aria-expanded="false">View full scope <span>+</span></button>
+            <div class="scope-panel">
+              <h4>Included scope</h4>
+              <ul>
+                <li>1 conversion-focused landing page</li>
+                <li>Responsive desktop, tablet and mobile design</li>
+                <li>Hero, offer/service, trust/testimonial and contact sections</li>
+                <li>Contact or enquiry form</li>
+                <li>Basic on-page SEO setup</li>
+                <li>Google Analytics setup</li>
+                <li>Basic speed optimisation</li>
+                <li>2 revision rounds</li>
+                <li>7-14 days post-launch defect support</li>
+              </ul>
+              <p class="boundary"><strong>Scope boundary</strong> Excludes multi-page websites, ecommerce, booking/payment systems, LMS, custom APIs and complex integrations.</p>
+            </div>
+            <a class="btn btn-gradient full" href="https://takweendigitalservices.co.uk/contact/">Discuss This Package →</a>
+          </article>
+
+          <article class="price-card featured">
+            <div class="popular">POPULAR</div>
+            <div class="price-card-top">
+              <h3>Business Website</h3>
+              <div class="price-row"><span class="old-price">From £1,995</span><span class="new-price">From £798</span></div>
+              <div class="discount-tag">60% off, limited launch slots</div>
+              <p class="best-for"><strong>Best for</strong> Small businesses and SMEs needing a professional core website.</p>
+              <ul class="plan-highlights">
+                <li>Up to 5 pages</li>
+                <li>Branded WordPress business website</li>
+                <li>Contact / enquiry form</li>
+                <li>14 days post-launch defect support</li>
+              </ul>
+            </div>
+            <button class="scope-toggle" aria-expanded="false">View full scope <span>+</span></button>
+            <div class="scope-panel">
+              <h4>Included scope</h4>
+              <ul>
+                <li>Up to 5 pages</li>
+                <li>Home, About, Services, Contact + one standard page</li>
+                <li>Branded WordPress business website</li>
+                <li>Responsive design</li>
+                <li>Contact / enquiry form</li>
+                <li>Basic SEO, analytics and security setup</li>
+                <li>Basic speed optimisation</li>
+                <li>2 revision rounds</li>
+                <li>Launch and handover</li>
+                <li>14 days post-launch defect support</li>
+              </ul>
+              <p class="boundary"><strong>Scope boundary</strong> Excludes ecommerce, LMS, memberships, bespoke booking, advanced APIs and premium third-party costs.</p>
+            </div>
+            <a class="btn btn-gradient full" href="https://takweendigitalservices.co.uk/contact/">Discuss This Package →</a>
+          </article>
+
+          <article class="price-card">
+            <div class="price-card-top">
+              <h3>Growth Website</h3>
+              <div class="price-row"><span class="old-price">From £2,995</span><span class="new-price">From £1,198</span></div>
+              <div class="discount-tag">60% off, limited launch slots</div>
+              <p class="best-for"><strong>Best for</strong> Growing businesses needing more pages, stronger conversion and integrations.</p>
+              <ul class="plan-highlights">
+                <li>Up to 8-10 pages</li>
+                <li>Blog/news setup</li>
+                <li>One standard third-party integration</li>
+                <li>30 days post-launch defect support</li>
+              </ul>
+            </div>
+            <button class="scope-toggle" aria-expanded="false">View full scope <span>+</span></button>
+            <div class="scope-panel">
+              <h4>Included scope</h4>
+              <ul>
+                <li>Up to 8-10 pages</li>
+                <li>Everything included in the Business Website package</li>
+                <li>Additional service or location pages</li>
+                <li>Blog/news setup</li>
+                <li>Portfolio or case-study section</li>
+                <li>Testimonials/reviews section</li>
+                <li>Advanced enquiry form</li>
+              
+                <li>Google Analytics and Search Console</li>
+            
+                <li>One standard third-party integration</li>
+                <li>3 revision rounds</li>
+                <li>Basic handover/training</li>
+                <li>30 days post-launch support</li>
+              </ul>
+              <p class="boundary"><strong>Scope boundary</strong> Excludes ecommerce, full LMS or memberships, bespoke booking, custom dashboards and complex APIs.</p>
+            </div>
+            <a class="btn btn-gradient full" href="https://takweendigitalservices.co.uk/contact/">Discuss This Package →</a>
+          </article>
+
+          <article class="price-card">
+            <div class="price-card-top">
+              <h3>WooCommerce Store</h3>
+              <div class="price-row"><span class="old-price">From £3,495</span><span class="new-price">From £1,398</span></div>
+              <div class="discount-tag">60% off, limited launch slots</div>
+              <p class="best-for"><strong>Best for</strong> Retailers launching or upgrading a professional online store.</p>
+              <ul class="plan-highlights">
+                <li>WooCommerce setup</li>
+                <li>Up to 15-20 products uploaded</li>
+                <li>Payment gateway setup</li>
+                <li>30 days post-launch defect support</li>
+              </ul>
+            </div>
+            <button class="scope-toggle" aria-expanded="false">View full scope <span>+</span></button>
+            <div class="scope-panel">
+              <h4>Included scope</h4>
+              <ul>
+                <li>WooCommerce setup</li>
+                <li>Professional storefront design</li>
+                <li>Homepage, shop/catalogue, product, cart, checkout pages</li>
+                <li>Up to 15-20 products uploaded</li>
+                <li>Up to 5 categories / collections</li>
+                <li>Payment gateway setup</li>
+                <li>Standard shipping configuration</li>
+                <li>Basic product SEO and analytics</li>
+                <li>Responsive store design</li>
+                <li>Basic product SEO and analytics</li>
+                <li>2 revision rounds</li>
+                <li>30 days post-launch support</li>
+              </ul>
+              <p class="boundary"><strong>Scope boundary</strong> Excludes large catalogues, subscriptions, advanced filtering, multilingual/multicurrency setup, ERP/CRM integrations and custom checkout.</p>
+            </div>
+            <a class="btn btn-gradient full" href="https://takweendigitalservices.co.uk/contact/">Discuss This Package →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<section class="section why-wordpress">
+      <div class="container why-grid">
+        <div class="why-copy">
+          <div class="eyebrow">WHY WORDPRESS</div>
+          <h2>Flexible Enough for Today. Ready for What Comes Next</h2>
+          <p>WordPress works well for businesses that need control over their content without being locked into a rigid website setup. It can support professional business websites, ecommerce, bookings, memberships, learning platforms and integrations - while giving your team a practical way to manage everyday content. We use WordPress when it fits the business requirement, not simply because it is familiar.</p>
+        </div>
+        <div class="why-visual" aria-hidden="true">
+          <div class="why-window">
+            <div class="wp-badge small">W</div>
+            <div class="why-bars"><span></span><span></span><span></span></div>
+            <div class="why-chart">
+              <b style="height:35%"></b><b style="height:52%"></b><b style="height:67%"></b><b style="height:88%"></b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="section custom-wp">
+      <div class="container custom-wp-card">
+        <div>
+          <div class="eyebrow dark">CUSTOM WORDPRESS DEVELOPMENT</div>
+          <h2>Custom WordPress Development</h2>
+          <div class="tailored">Tailored Quote</div>
+          <p>Advanced LMS, membership systems, bespoke booking workflows, custom plugins, APIs, dashboards, custom integrations and unusual business logic that falls outside the standard packages.</p>
+        </div>
+        <a class="btn btn-gradient" href="https://takweendigitalservices.co.uk/contact/">Discuss a Custom WordPress Project →</a>
+      </div>
+    </section>
+
+<section class="section why-takween section-tint">
+      <div class="container">
+        <div class="section-head centered narrow">
+          <div class="eyebrow">WHY TAKWEEN</div>
+          <h2>Clear From Scope to Launch</h2>
+        </div>
+        <div class="card-grid four">
+          <article class="info-card compact"><div class="icon-chip">✓</div><h3>Clear Scope</h3><p>You know what is included before development starts.</p></article>
+          <article class="info-card compact"><div class="icon-chip">£</div><h3>Transparent Pricing</h3><p>Base packages and common add-ons are visible before you enquire; anything custom is scoped separately.</p></article>
+          <article class="info-card compact"><div class="icon-chip">↻</div><h3>Post-Launch Support</h3><p>Support continues through the agreed post-launch period.</p></article>
+          <article class="info-card compact"><div class="icon-chip">✦</div><h3>Direct Communication</h3><p>You get clear project updates without unnecessary complexity.</p></article>
+        </div>
+      </div>
+    </section>
+
+<section class="section faq">
+      <div class="container faq-grid">
+        <div class="faq-intro">
+          <div class="eyebrow">FREQUENTLY ASKED QUESTIONS</div>
+          <h2>Everything You Need to Know Before You Start</h2>
+          <a class="btn btn-gradient faq-cta" href="https://takweendigitalservices.co.uk/contact/">Discuss Your WordPress Project →</a>
+        </div>
+        <div class="accordion">
+          <div class="faq-item"><button class="faq-q">How much does a WordPress website cost?<span>+</span></button><div class="faq-a"><p>Launch pricing currently starts from £358 for a landing page, £798 for a business website, £1,198 for a growth website and £1,398 for a WooCommerce store. Standard/public prices are shown alongside the launch offer.</p></div></div>
+          <div class="faq-item"><button class="faq-q">Can you redesign my existing WordPress website?<span>+</span></button><div class="faq-a"><p>Yes. We can review the current site, identify what should stay, what needs improvement and whether a redesign or rebuild is the better route.</p></div></div>
+          <div class="faq-item"><button class="faq-q">Do you build WooCommerce stores?<span>+</span></button><div class="faq-a"><p>Yes. WooCommerce projects can include the storefront, product catalogue, payments, shipping, checkout and the core pages needed to sell online.</p></div></div>
+          <div class="faq-item"><button class="faq-q">Will I be able to edit the website myself?<span>+</span></button><div class="faq-a"><p>Where appropriate, we structure WordPress so routine content updates are manageable and can provide basic handover guidance.</p></div></div>
+          <div class="faq-item"><button class="faq-q">What happens after launch?<span>+</span></button><div class="faq-a"><p>Each standard package includes an agreed post-launch defect-support period. Ongoing maintenance or additional support can be scoped separately.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+<section class="final-cta">
+      <div class="container final-cta-inner">
+        <div>
+          <div class="eyebrow dark">READY TO START?</div>
+          <h2>Have a WordPress Project You Want to Get Right?</h2>
+          <p>Tell us what you are trying to build, improve or replace. You do not need to arrive with a technical specification - start with what the business needs.</p>
+        </div>
+        <div class="final-actions">
+          <a class="btn btn-gradient" href="https://takweendigitalservices.co.uk/contact/">Discuss Your WordPress Project →</a>
+          <a class="btn btn-outline-dark" href="#portfolio">View WordPress Work</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="https://takweendigitalservices.co.uk/"><span class="brand-mark">tk</span><span class="brand-word">takween</span></a>
+        <p>Websites and digital tools that actually work.</p>
+        <a class="btn btn-gradient small-btn" href="https://takweendigitalservices.co.uk/contact/">Start Your Project →</a>
+      </div>
+      <div><h4>Company</h4><a href="https://takweendigitalservices.co.uk/">Home</a><a href="https://takweendigitalservices.co.uk/about/">About</a><a href="https://takweendigitalservices.co.uk/services/">Services</a><a href="https://takweendigitalservices.co.uk/portfolio/">Portfolio</a><a href="https://takweendigitalservices.co.uk/contact/">Contact</a></div>
+      <div><h4>Services</h4><a href="#">WordPress Websites</a><a href="#">Shopify Stores</a><a href="#">Landing Pages</a><a href="#">LMS &amp; Course Websites</a><a href="#">Social Media Design</a><a href="#">Sales Funnels</a><a href="#">Custom Full-Stack Development</a></div>
+      <div><h4>Contact</h4><p>Have a project in mind? Tell us what you need and we’ll help you plan the right next step.</p><a href="mailto:hello@takweendigitalservices.co.uk">Email us</a><p>UK-based digital agency</p><p>We reply within one working day</p></div>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 Takween Digital. All rights reserved.</span><span>Privacy Policy&nbsp;&nbsp; | &nbsp;&nbsp;Terms &amp; Conditions</span></div>
+  </footer>
+
+<div class="sticky-offer" id="stickyOffer">
+    <div class="container sticky-offer-inner">
+      <div>
+        <strong>WordPress Launch Offer</strong>
+        <span>Landing Pages from £358 • Business Websites from £798</span>
+      </div>
+      <a class="btn btn-gradient" href="#pricing">View Packages →</a>
+    </div>
+  </div>
+
+  <script>document.addEventListener('DOMContentLoaded', () => {
+  const navToggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.main-nav');
+  if (navToggle && nav) {
+    navToggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  document.querySelectorAll('.scope-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panel = button.nextElementSibling;
+      const open = panel.classList.toggle('open');
+      button.setAttribute('aria-expanded', String(open));
+      button.querySelector('span').textContent = open ? '−' : '+';
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panel = button.nextElementSibling;
+      const alreadyOpen = panel.classList.contains('open');
+
+      document.querySelectorAll('.faq-a.open').forEach((item) => item.classList.remove('open'));
+      document.querySelectorAll('.faq-q span').forEach((s) => s.textContent = '+');
+
+      if (!alreadyOpen) {
+        panel.classList.add('open');
+        button.querySelector('span').textContent = '−';
+      }
+    });
+  });
+});
+const stickyOffer = document.getElementById('stickyOffer');
+if (stickyOffer) {
+  const toggleSticky = () => {
+    stickyOffer.classList.toggle('visible', window.scrollY > 620);
+  };
+  toggleSticky();
+  window.addEventListener('scroll', toggleSticky, { passive: true });
+}
+</script>
+</body>
+</html>
